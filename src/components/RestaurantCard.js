@@ -1,5 +1,6 @@
 import resList from "../utilities/mockData";
 import Body from "./Body";
+import RestaurantMenu from "./RestaurantMenu";
 const RestaurantCard = (props) => {
     const {resData}=props;
     const {

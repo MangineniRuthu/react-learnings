@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
+import {Link} from "react-router-dom";
+import { MENU_URL } from "../utilities/constants";
+
+
 
 const Body = () => {
   const [listOfRestaurants,setlistOfRestaurants]=useState([]);
@@ -10,13 +14,14 @@ const Body = () => {
   useEffect(()=>{fetchData();},[])
 
   const fetchData = async () =>{
-    const response = await fetch("https://dummyjson.com/recipes");
+    const response = await fetch(MENU_URL);
     const json = await response.json(response);
     
     console.log(json);  
     
     setlistOfRestaurants(json?.recipes);
     setFilteredRestaurants(json?.recipes);
+    
   };
 
     return listOfRestaurants.length === 0?( <Shimmer/>):(
@@ -46,10 +51,12 @@ const Body = () => {
             Top Rated Restaurant</button>
         </div>
         <div className="res-container">
-          {filteredRestaurants.map((restaurant)=>
-            (<RestaurantCard key={restaurant.id} resData={restaurant}/>))}
-          
-        </div>
+        {filteredRestaurants.map((restaurant) => (   
+          <Link to={"/restaurants/" + restaurant.id} key={restaurant.id}>
+            <RestaurantCard resData={restaurant} />
+          </Link>
+        ))}
+      </div>
       </div>
     );
   };
