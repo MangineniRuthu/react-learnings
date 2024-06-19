@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import logo1 from "../../img/logo1.png";
 import {Link} from "react-router-dom";
+import useOnlineStatus from "../utilities/useOnlineStatus";
+import Groceries from "./Groceries";
 
 
 const Header = () => {
@@ -9,6 +11,8 @@ const Header = () => {
   useEffect(()=>{
     console.log("useEffect withdependency array changes");
   },[{btnNameReact}])
+
+  const onlineStatus=useOnlineStatus();
     return (
       <div className="header">
         <div className="logo-container">
@@ -19,6 +23,7 @@ const Header = () => {
             <li>
             <Link to="/">Home</Link>
             </li>
+            <li>Online Status:{onlineStatus?"✅":"🔴"}</li>
             <li>
               <Link to="/about">About Us</Link>
             </li>
@@ -27,6 +32,9 @@ const Header = () => {
             </li>
             <li>
             <Link to="/cart">Cart</Link>
+            </li>
+            <li>
+              <Link to="/groceries">Groceries</Link>
             </li>
             <button className="login"
             onClick={()=>{
