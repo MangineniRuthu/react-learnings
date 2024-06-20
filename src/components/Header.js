@@ -14,12 +14,12 @@ const Header = () => {
 
   const onlineStatus=useOnlineStatus();
     return (
-      <div className="header">
-        <div className="logo-container">
+      <div className="flex">
+        <div className="m-4 p-4">
           <img className="logo" src={logo1} />
         </div>
-        <div className="nav-items">
-          <ul>
+        <div className="flex">
+          <ul className="flex-wrap">
             <li>
             <Link to="/">Home</Link>
             </li>
