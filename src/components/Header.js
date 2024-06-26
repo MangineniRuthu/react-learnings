@@ -6,7 +6,7 @@ import Groceries from "./Groceries";
 
 
 const Header = () => {
-  const [btnNameReact,setBtnNameReact] = useState("login");
+  const [btnNameReact,setBtnNameReact] = useState("Login");
   console.log("Header rendered");
   useEffect(()=>{
     console.log("useEffect withdependency array changes");
@@ -14,31 +14,31 @@ const Header = () => {
 
   const onlineStatus=useOnlineStatus();
     return (
-      <div className="flex">
-        <div className="m-4 p-4">
-          <img className="logo" src={logo1} />
+      <div className="flex justify-between bg-gray shadow-lg">
+        <div className="logo-container">
+          <img className="w-[100]" src={logo1} />
         </div>
-        <div className="flex">
-          <ul className="flex-wrap">
-            <li>
+        <div className="nav-items">
+          <ul className="flex p-4 m-4">
+            <li className="p-3">  
             <Link to="/">Home</Link>
             </li>
-            <li>Online Status:{onlineStatus?"✅":"🔴"}</li>
-            <li>
-              <Link to="/about">About Us</Link>
+            <li className="p-3">Online Status:{onlineStatus?"✅":"🔴"}</li>
+            <li className="p-3">
+              <Link to="/about" class="font-bold ">About Us</Link>
             </li>
-            <li>
+            <li className="p-3">
               <Link to="/contact">Contact Us</Link>
             </li>
-            <li>
+            <li className="p-3">
             <Link to="/cart">Cart</Link>
             </li>
-            <li>
+            <li className="p-3">
               <Link to="/groceries">Groceries</Link>
             </li>
-            <button className="login"
+            <button className="shadow-zinc-400 bg-zinc-600 rounded-lg w-[100] text-neutral-50"
             onClick={()=>{
-              btnNameReact==="login"?setBtnNameReact("logout"):setBtnNameReact("login");
+              btnNameReact==="Login"?setBtnNameReact("Logout"):setBtnNameReact("Login");
             }}
             >
               {btnNameReact}</button>

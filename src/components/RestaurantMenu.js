@@ -19,12 +19,13 @@ const RestaurantMenu=()=>{
         <Shimmer/>
     );
     return(
-        <div>
-            <h1>{name}</h1>
-            <h2>{cuisine}</h2>
-            <h2>{rating}</h2>
-            <ul>
-            {ingredients && ingredients.map((item, index) => (
+        <div className="p-10 m-10  w-[500px] bg-violet-50 border-solid  shadow-lg shadow-black text-brown rounded-sm">
+            <h1 className="p-4 m-4 bg-red-950 text-white text-center shadow-md shadow-black rounded-sm">ITEM DETAILS</h1>
+            <h1 className="p-4 m-4 bg-black text-center  text-white shadow-md shadow-black rounded-sm">{name}</h1>
+            <h2 className="p-4 m-4 bg-black text-white text-center shadow-md shadow-black rounded-sm">{cuisine}</h2>
+            <h2 className="p-4 m-4  bg-black text-white text-center shadow-md shadow-black rounded-sm">⁎ {rating}</h2>
+            <ul className="p-4 m-4  bg-black text-white text-center shadow-md shadow-black rounded-sm">
+            {ingredients && ingredients.map((item, index) => (  
                 <li key={index}>{item}</li>
             ))}
         </ul>
