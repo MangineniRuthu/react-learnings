@@ -1,25 +1,30 @@
-import { useEffect, useState } from "react";
-import RestaurantCard from "./RestaurantCard";
+import {useEffect, useState ,useContext} from "react";
+import RestaurantCard,{withPromotedLabel} from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import {Link} from "react-router-dom";
 import { MENU_URL } from "../utilities/constants";
 import useOnlineStatus from "../utilities/useOnlineStatus";
+import UserContext from "../utilities/UserContext"
+
+
 
 
 const Body = () => {
-  const [listOfRestaurants,setlistOfRestaurants]=useState([]);
   const [filteredRestaurants,setFilteredRestaurants]=useState([]);
+  const [listOfRestaurants,setListOfRestaurants]=useState([]);
   const[searchText,setSearchText]=useState("");
+  const RestaurantCardPromoted=withPromotedLabel(RestaurantCard);
+  const{loggedInUser,setUserInfo}=useContext(UserContext);
+  
 
   useEffect(()=>{fetchData();},[])
 
   const fetchData = async () =>{
     const response = await fetch(MENU_URL);
     const json = await response.json(response);
+    console.log(json?.recipes?.mealType);  
     
-    console.log(json);  
-    
-    setlistOfRestaurants(json?.recipes);
+    setListOfRestaurants(json?.recipes);
     setFilteredRestaurants(json?.recipes);
     
   };
@@ -49,17 +54,26 @@ const Body = () => {
               onClick={()=>{
                 const filteredList = listOfRestaurants.filter(
                   (res) => res.rating > 4.5);
-                  setlistOfRestaurants(filteredList);
+                  setListOfRestaurants(filteredList);
               }}>
                 Top Rated Restaurant
             </button>
+            <div className="p-3">
+              <label className="font-bold">UserName:</label>
+            <input className="border border-black"  value={loggedInUser} onChange={(e)=>setUserInfo(e.target.value)}/>
+            </div>
+
+            
           </div>
+          
           
         </div>
         <div className="flex flex-wrap">
         {filteredRestaurants.map((restaurant) => (   
           <Link  className="link" to={"/restaurants/" + restaurant.id} key={restaurant.id}>
-            <RestaurantCard resData={restaurant} />
+          {restaurant.rating >4.6?
+          (<RestaurantCardPromoted resData={restaurant}/>): (<RestaurantCard resData={restaurant} />)};
+          
           </Link>
         ))}
       </div>

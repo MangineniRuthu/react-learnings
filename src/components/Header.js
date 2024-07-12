@@ -1,12 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState ,useContext} from "react";
 import logo1 from "../../img/logo1.png";
 import {Link} from "react-router-dom";
 import useOnlineStatus from "../utilities/useOnlineStatus";
 import Groceries from "./Groceries";
+import UserContext from "../utilities/UserContext";
 
 
 const Header = () => {
   const [btnNameReact,setBtnNameReact] = useState("Login");
+
+  const { loggedInUser } = useContext(UserContext);
   console.log("Header rendered");
   useEffect(()=>{
     console.log("useEffect withdependency array changes");
@@ -35,6 +38,9 @@ const Header = () => {
             </li>
             <li className="p-3">
               <Link to="/groceries">Groceries</Link>
+            </li>
+            <li className="p-3">
+              <h2>{loggedInUser}</h2>
             </li>
             <button className="shadow-zinc-400 bg-zinc-600 rounded-lg w-[100] text-neutral-50"
             onClick={()=>{

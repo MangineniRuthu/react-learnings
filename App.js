@@ -7,6 +7,8 @@ import Error from "./src/components/Error";
 import Contact from "./src/components/Contact";
 import { createBrowserRouter,Outlet,RouterProvider,Outlet } from "react-router-dom";
 import RestaurantMenu from "./src/components/RestaurantMenu";
+import UserContext from "./src/utilities/UserContext";
+import {useState,useEffect} from "react";
 // import Groceries from "./src/components/Groceries";
 
 
@@ -14,11 +16,22 @@ import RestaurantMenu from "./src/components/RestaurantMenu";
 const Groceries=lazy(() => import("./src/components/Groceries"));
 const About= lazy(()=>import("./src/components/About"));
 const AppLayout = () => {
+  const [userInfo,setUserInfo]=useState();
+  useEffect(()=>{
+    const data={
+      name:"Ruthu M",
+    }
+    setUserInfo(data.name)
+  },[])
   return (
-    <>
-      <Header />
+    <UserContext.Provider value={{loggedInUser:userInfo,setUserInfo}}>
+    <div className="app">
+      <UserContext.Provider value={{loggedInUser:"Krupa M"}}>
+        <Header />
+      </UserContext.Provider>
       <Outlet />
-    </>
+    </div>
+    </UserContext.Provider>
   );
 };
 const appRouter=createBrowserRouter([
