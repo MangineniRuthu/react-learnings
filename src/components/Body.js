@@ -27,7 +27,7 @@ const Body = () => {
     setListOfRestaurants(json?.recipes);
     setFilteredRestaurants(json?.recipes);
     
-  };
+  }
   const onlineStatus=useOnlineStatus();
   if(onlineStatus === false) return <h1>Looks like your offline!! Please try to connect Again</h1>
 
